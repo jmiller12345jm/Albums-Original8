@@ -1,0 +1,54 @@
+<head><link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script></head>
+
+<div class="topofscreen">
+<h1>
+  Albums
+</h1>
+  
+<div class="page-nav">
+  <button onclick="switchSheet('collection')" id="btn-col" class="nav-btn active">2026</button>
+  <button onclick="switchSheet('archive')" id="btn-arc" class="nav-btn">2025</button>
+</div>
+  
+ 
+<section class="form-section">
+
+  
+  
+  
+<form id="reviewForm" class="horizontal-form">
+  <input type="text" name="Artist" placeholder="Artist" required>
+  <input type="text" name="Album" placeholder="Album" required>
+  
+  <select id="categoryDropdown" name="Chooser"required>
+    <option value="">Category</option>
+  </select>
+
+  <button type="submit" id="submitBtn">Submit</button>
+</form>
+<div id="status"></div>
+</section>
+  
+  
+</div>
+<div class="filter-controls">
+ <label for="sortSelect" class="filter-label">SORT BY:</label>
+  <select id="sortSelect" class="sort-dropdown">
+    <option value="newest">Newest Added</option>
+    <option value="highest">Overall Average</option>
+    </select>
+<button id="refreshBtn" class="glow-text-btn" onclick="manualRefresh()">
+  REFRESH
+</button>
+  </div>
+<hr>
+  <section class="display-section">
+    <h2></h2>
+    <div id="cardContainer">
+      <p class="loading-text">Refreshing...</p>
+    </div>
+  </section>
+
+
+</div>
