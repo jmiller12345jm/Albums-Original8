@@ -1,7 +1,8 @@
 <head><link rel="stylesheet" href="style.css">
 <script src="script.js" defer></script></head>
 
-<div class="topofscreen">
+
+<div class="header">
 <h1>
   Albums
 </h1>
@@ -11,13 +12,8 @@
   <button onclick="switchSheet('archive')" id="btn-arc" class="nav-btn">2025</button>
 </div>
   
- 
 <section class="form-section">
-
-  
-  
-  
-<form id="reviewForm" class="horizontal-form">
+  <form id="reviewForm" class="horizontal-form">
   <input type="text" name="Artist" placeholder="Artist" required>
   <input type="text" name="Album" placeholder="Album" required>
   
@@ -29,10 +25,8 @@
 </form>
 <div id="status"></div>
 </section>
-  
-  
-</div>
-<div class="filter-controls">
+
+  <div class="filter-controls">
  <label for="sortSelect" class="filter-label">SORT BY:</label>
   <select id="sortSelect" class="sort-dropdown">
     <option value="newest">Newest Added</option>
@@ -42,7 +36,13 @@
   REFRESH
 </button>
   </div>
-<hr>
+  
+</div>
+
+
+
+
+
   <section class="display-section">
     <h2></h2>
     <div id="cardContainer">
@@ -51,4 +51,3 @@
   </section>
 
 
-</div>
