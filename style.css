@@ -36,7 +36,9 @@ hr {
   display: none;
 }
 
-h1 {
+h1 {position:absolute;
+  top:5pt;
+  left:20pt;
  padding:0pt 40pt;
 font-style: sans-serif;
 font-size: 50pt;
