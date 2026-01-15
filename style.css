@@ -37,7 +37,7 @@ hr {
 }
 
 h1 {position:absolute;
-  top:5pt;
+  top:-20pt;
   left:20pt;
  padding:0pt 40pt;
 font-style: sans-serif;
@@ -57,7 +57,7 @@ topofscreen {height:400pt;}
 body {
   background-color: #080808; /* Deepest black/grey */
   margin: 0;
-  padding-top: 100pt;
+  padding-top: 50pt;
   font-family: 'Inter', sans-serif; /* A clean, modern font */
 }
 .app-container { max-width: 800px; margin: 0 auto;
