@@ -112,7 +112,7 @@ h1:hover {
 /* 5. THE FORM SECTION (Positioned top right) */
 .form-section {
   display:flex;
-  flex-direction:center;
+  flex-align:center;
   position: absolute;
   right: 40pt;
   top: 50px; 
@@ -155,7 +155,7 @@ h1:hover {
 
 .card:hover {
   transform: translateY(-10px);
-  box-shadow: 0px 0px 25px 0px #ffffff;
+  box-shadow: 0px 0px 25px 0px #9df3bc;
 }
 
 /* ... (Keep your bar-chart, ave, and titles CSS as they were) ... */
@@ -532,6 +532,23 @@ display: flex;
 }
 @media (max-width: 768px) {
   .card-content {
+    flex-direction: column; /* Stacks everything vertically */
+    text-align: center;
+  }
+  
+  .card img {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .bar-chart {
+    width: 100%;
+    margin: 20px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-content {
     display: flex;
     flex-direction: column !important;
     align-items: center;
@@ -545,10 +562,24 @@ display: flex;
 
   /* 2. Titles come second */
   .titles {
-    order: 2;
-    margin-left: 0 !important;
-    margin-bottom: 5px; /* Tighten space for the score */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;    /* Centers items horizontally */
+    justify-content: center !important; /* Centers items vertically */
+    text-align: center !important;      /* Centers the text lines */
+    width: 100% !important;             /* Takes full width to ensure true center */
+    margin: 10px 0 !important;          /* Clears desktop margins */
+    padding: 0 !important;
+    flex: none !important;              /* Prevents uneven stretching */
   }
+
+  .titles h3, .titles h4 {
+    text-align: center !important;
+    width: 100% !important;
+    margin: 5px 0 !important;
+    display: block !important;
+  }
+ 
 
   /* 3. Average Score jumps here (Under Titles) */
   .ave {
@@ -572,7 +603,7 @@ display: flex;
   }
 
 .topofscreen {
-    position: fixed;    /* Keep it sticky */
+    position:relative;    /* Keep it sticky */
     height: auto !important; /* Let it expand to fit stacked items */
     padding: 10px !important;
     display: flex;
@@ -634,7 +665,7 @@ display: flex;
 
   /* Adjust the spacing for the cards so they don't hide under the new header */
   #cardContainer {
-    margin-top: 460px !important; /* Adjust this number if your header gets taller */
+    margin-top: 20px !important; /* Adjust this number if your header gets taller */
   }
 .horizontal-form input[type="text"],
   .horizontal-form select,
@@ -647,4 +678,4 @@ display: flex;
     width: 100%;
     padding: 12px;
   }
-}
+}}
