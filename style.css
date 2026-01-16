@@ -1,206 +1,156 @@
 /* This removes borders from the control area and the container */
-.dashboard-controls, 
-#cardContainer, 
-header {padding-top:40pt;
-  border: none !important;
-  box-shadow: none !important;
+/* 1. RESET & GLOBAL STYLES */
+* {
+  box-sizing: border-box; /* Makes padding easier to manage */
 }
 
 
 
-.header {
+body {
+  background-color: #080808;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  color: white;
+}
+
+/* 2. THE STICKY HEADER (Title, Nav, and Filters stay at the top) */
+.topofscreen {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 230px; /* Adjust height to fit your title/filters */
-  background: #080808; /* Match your body color */
-  z-index: 1000; /* Keeps it on top of the cards */
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  display: flex;
-  flex-direction: column;
-  padding-left: 40pt;
+  background: #080808;
+  z-index: 1000;
+  height:150pt;
+  padding: 20px 40pt;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: none !important;
 }
+
+.glow-text-btn {background: transparent;
+  border: none;
+  color: #444;
+  font-size: 11px;
+  letter-spacing: 3px;
+  cursor: pointer;
+  transition: 0.4s;}
+.glow-text-btn:hover {color:#ffffff}
+.glow-text-btn.active {color:#ffffff}
+
+h1 {
+  padding: 0pt 0pt;
+  font-size: 60px;
+  text-transform: uppercase;
+  color: #666;
+  letter-spacing: 1px;
+  transition: all 1s;
+  cursor: default;
+}
+
+h1:hover {
+  color: #ffffff;
+}
+.active-glow {
+  color: #fff !important;
+  text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}
+
+/* 3. NAVIGATION (Years) */
 .page-nav {
   position:absolute;
-  top:50pt;
+  top:53pt;
   left:300pt;
-  transform: translateX(-50%);
-  display: flex;
-  justify-content: center;
   gap: 50px;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .nav-btn {
   background: transparent;
   border: none;
-  color: #444;
-  font-size: 20px;
+  color: #666;
+  font-size: 25px;
   letter-spacing: 3px;
   cursor: pointer;
   transition: 0.4s;
 }
 
-/* The Active Page Glow */
 .nav-btn.active {
-  color: #fff;
-  text-shadow: 0 0 10px rgba(255,255,255,0.8);
-}
-/* If you have a horizontal rule tag in your HTML */
-hr {
-  display: none;
-}
-h1 {
-  color:#ffffff
-  margin: 5pt;
-  padding-top: 15px;
-  font-size: 50px;
+  color: #666;
 }
 
-h1:hover {color:#ffffff}
-
-
-
-body {
-  background-color: #080808; /* Deepest black/grey */
-  margin: 0;
-  padding-top: 15pt;
-  font-family: 'Inter', sans-serif; /* A clean, modern font */
-}
-.app-container { max-width: 800px; margin: 0 auto;
-}
-
+/* 4. FILTERS (Now aligned left under title) */
 .filter-controls {
-  position: static; /* Remove absolute */
-  margin-top: 10px;
+  position: absolute;
+  bottom: 2pt;
+  left: 20pt;
+  display: flex;
+  gap: 20px;
+  align-items: center;
 }
 
-.sort-btn {
-  display:flex;
-  align:row;
-background: transparent;
-  border: none;
+.filter-label {
   color: #666;
   font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  cursor: pointer;
-  letter-spacing: 1px;
-  transition: all 0.5s;
 }
 
-.sort-btn:hover {
-color:#ffffff;}
-}
-
-.sort-btn:hover {
-  border-color: #ffffff; /* Neon green glow */
-  box-shadow: 0 0 10px rgba(57, 255, 20, 0.2);
-}
-
-
-.glow-text-btn {
+.sort-dropdown {
   background: transparent;
+  color: #ffffff;
   border: none;
-  color: #666; /* Dim gray by default */
-  font-family: inherit;
-  font-size: 10px;
-  letter-spacing: 1px;
+  font-size: 11px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  padding: 0px;
+  text-transform: uppercase;
   outline: none;
 }
 
-/* Hover effect */
-.glow-text-btn:hover {
-  color: #ffffff;
-}
-
-/* The actual glow when pressed/loading */
-.active-glow {
-  color: #fff !important;
-  text-shadow: 0 0 10px #39FF14, 0 0 20px #ffffff;
-  transform: scale(1.1);
-}
-
+/* 5. THE FORM SECTION (Positioned top right) */
 .form-section {
-  height:55pt;
-background: #121212; /* Barely visible white */
-  backdrop-filter: blur(100px); /* Blurs the background behind it */
+  position: absolute;
+  right: 40pt;
+  top: 50px; 
+  background: #121212;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 30px;
-  border-radius: 20px;
-  margin-bottom: 40px;
-  width: 400pt;
-  
+  padding: 15px;
+  border-radius: 15px;
+  height: auto; /* Let it fit the form */
 }
 
-
-
-.input-group { margin-bottom: 15px; }
-.chooser {background:white}
-
-label { display: block; margin-bottom: 5px; font-weight: bold; color:white; }
-
-input, select, textarea { width: 50%; padding: 10px; border: 0px solid ; border-radius: 20px; box-sizing: border-box; 
-text-align: center;
-color:white;}
-
-
-button { 
-  
-  width: 20%; padding: 4px; background: rgba(120,0,140,0.9); color: white; border: none; border-radius: 20px; cursor: pointer; font-size: 16px; }
-
-button:active {color:#fffff}
-button:disabled { background: #ccc; }
-
-
-#display-section{padding:30pt;
-align-items: center;
-width:100%}
-
-
-
-
+/* 6. THE CARDS CONTAINER (Shifted down to clear the fixed header) */
 #cardContainer {
   display: flex;
- flex-direction: column;
+  flex-direction: column;
   gap: 30px;
-  margin-top: 180px;
+  margin-top: 250px; /* This margin clears the fixed header */
   width: 100%;
   align-items: center;
-  color:white
+  padding-bottom: 20px;
 }
 
 .card {
   position: relative;
-  align:center;
   background: #0F0F0F;
   border-radius: 40px;
-  padding: 20px 20px;
-  box-shadow: 0 0px 5px 0px #e3ebe1, 0 0px 5px 0px #e3ebe1;
-  transition: transform 2s ease, box-shadow 2s ;
-  border-top: px solid rgba(111, 0 ,193, 0.7); /* Matches your submit button */
+  padding: 20px;
+  box-shadow: 0 0px 5px 0px #e3ebe1;
+  transition: transform 0.5s ease, box-shadow 0.5s;
   display: flex;
   flex-direction: row;
-  gap: 2%;
- width: 90%;      /* Takes up most of the screen */
-  max-width: 900px; /* But won't get ridiculously huge on a big monitor */
-  height: auto;     /* Let the card grow if the text is long */
-  min-height: 230pt;
+  width: 80%;
+  height: 230pt;
 }
-
-.card-content{display:flex;
-flex-direction: row;
-gap:20pt;}
 
 .card:hover {
   transform: translateY(-10px);
-  box-shadow: 0px 0px 25px 0px #9df3bc, 0 0px 20px 5px #9df3bc;
+  box-shadow: 0px 0px 25px 0px #9df3bc;
 }
 
+/* ... (Keep your bar-chart, ave, and titles CSS as they were) ... */
 .titles {
   position:absolute;
   left:-170pt;
@@ -525,7 +475,26 @@ button[type="submit"]:disabled {
   color: #ffffff; /* Glows green on hover */
 }
 
+/* Container for the label and select */
+.filter-controls {
+  display: flex;
+  align-items: flex-start;
+  justify-content: right; /* Centers the controls */
+  gap: 5px;
+  margin: 0px 0;
+  padding:5px 10px;
+}
 
+/* The "SORT BY:" text */
+.filter-label {
+  color: #666;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display:inline-block;
+  line-height: ;
+}
 
 .sort-dropdown {
   background: transparent;
@@ -565,3 +534,4 @@ button[type="submit"]:disabled {
   letter-spacing: 2px; /* Makes it look fancy while sending */
   transition: all 0.3s ease;
 }
+
