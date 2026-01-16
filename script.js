@@ -161,10 +161,7 @@ function renderCards(data) {
   <div class="metaname">
   ${item.Chooser}
   </div>
-    <img src="${finalArtURL}" 
-       class="album-art" 
-       id="${imgId}" 
-       crossorigin="anonymous">
+    <img src="${item.Art || placeholder}" class="album-art" id="${imgId}" crossorigin="anonymous">
      <button class="edit-art-btn" onclick="editArtURL(${item.originalRow})">Edit Art</button>
     </div>
     
@@ -195,20 +192,13 @@ function renderCards(data) {
     const img = document.getElementById(imgId);
     img.onload = function() {
       img.style.opacity = "1";
-     try {
-    const colorThief = new ColorThief();
-    // Ensure the image is fully loaded and not broken
-    if (img.complete && img.naturalWidth !== 0) {
-      const color = colorThief.getColor(img);
-      const rgb = `${color[0]}, ${color[1]}, ${color[2]}`;
-      card.style.boxShadow = `0 10px 40px rgba(${rgb}, 0.4)`;
-      card.style.borderColor = `rgba(${rgb}, 0.2)`;
-    }
-  } catch (e) { 
-    console.warn("ColorThief blocked for this image: ", e);
-    // Fallback shadow if blocked
-    card.style.boxShadow = `0 10px 40px rgba(255, 255, 255, 0.1)`;
-  }
+      try {
+        const colorThief = new ColorThief();
+        const color = colorThief.getColor(img);
+        const rgb = `${color[0]}, ${color[1]}, ${color[2]}`;
+        card.style.boxShadow = `0 10px 40px rgba(${rgb}, 0.4)`;
+        card.style.borderColor = `rgba(${rgb}, 0.2)`;
+      } catch (e) { console.warn("ColorThief blocked"); }
     };
     
     // Fetch iTunes art if column is empty
