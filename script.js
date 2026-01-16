@@ -331,7 +331,7 @@ function handleSubmit(e) {
     e.target.reset();
     setTimeout(() => {
       submitBtn.innerText = "Submit";
-       submitBtn.style.color = "none"
+       submitBtn.style.color = "#666"
       init();
     }, 1500);
   });
