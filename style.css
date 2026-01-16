@@ -530,19 +530,87 @@ display: flex;
   letter-spacing: 2px; /* Makes it look fancy while sending */
   transition: all 0.3s ease;
 }
+/* 7. MOBILE RESPONSIVENESS */
 @media (max-width: 768px) {
-  .card-content {
-    flex-direction: column; /* Stacks everything vertically */
+  /* Fix the Header Height */
+  .topofscreen {
+    height: auto;
+    position: relative; /* Unstick it or keep it fixed but flexible */
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 32px; /* Smaller title */
     text-align: center;
   }
-  
-  .card img {
-    width: 200px;
-    height: 200px;
+
+  /* Move Navigation (Years) into a centered row */
+  .page-nav {
+    position: static;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 10px 0;
   }
-  
+
+  .nav-btn {
+    font-size: 18px;
+  }
+
+  /* Stack the Form Section */
+  .form-section {
+    position: static;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .horizontal-form {
+    flex-direction: column; /* Stack inputs vertically */
+    gap: 8px;
+  }
+
+  .horizontal-form input, 
+  .horizontal-form select {
+    width: 100%;
+  }
+
+  /* Card Layout Adjustments */
+  #cardContainer {
+    margin-top: 20px; /* No longer need 250px if header isn't fixed */
+    padding: 10px;
+  }
+
+  .card-content {
+    flex-direction: column; /* THE MOST IMPORTANT CHANGE */
+    text-align: center;
+    gap: 15px;
+  }
+
+  .card img {
+    width: 80vw; /* Image takes up most of the screen width */
+    height: 80vw;
+  }
+
+  .titles {
+    margin-left: 0;
+    min-width: unset;
+  }
+
   .bar-chart {
     width: 100%;
-    margin: 20px 0;
+    min-width: unset;
+    height: 180px;
+  }
+
+  .ave {
+    margin-right: 0;
+    margin-top: 10px;
+  }
+
+  /* Filters Row */
+  .filter-controls {
+    position: static;
+    justify-content: center;
+    margin-top: 10px;
   }
 }
