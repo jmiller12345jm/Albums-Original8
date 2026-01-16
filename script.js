@@ -275,11 +275,20 @@ function confirmDelete(rowNumber) {
 function editArtURL(rowNumber) {
   const newURL = prompt("Paste Image URL:");
   if (!newURL) return;
-  fetch(scriptURL, {
+const currentSheet = scriptURL.includes('Sheet3') ? 'Sheet3' : 'albums2026';
+fetch(baseScriptURL, { // Use baseScriptURL for POST
     method: 'POST',
     mode: 'no-cors',
-    body: JSON.stringify({ action: "updateArt", row: rowNumber, artUrl: newURL })
-  }).then(() => init());
+    body: JSON.stringify({ 
+      action: "updateArt", 
+      row: rowNumber, 
+      artUrl: newURL,
+      sheetMode: currentSheet // This tells the Google Script which sheet to use!
+    })
+  }).then(() => {
+    // Give Google a second to process before refreshing
+    setTimeout(() => init(), 500);
+  });
 }
 
 // 7. EVENT LISTENERS
