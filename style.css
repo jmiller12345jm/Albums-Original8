@@ -532,35 +532,42 @@ display: flex;
 }
 /* 7. MOBILE RESPONSIVENESS */
 @media (max-width: 768px) {
-  /* ... your other mobile code ... */
-
   .card-content {
-    flex-direction: column !important; /* Forces vertical stacking */
-    align-items: center !important;    /* Centers everything horizontally */
-    justify-content: center !important;
-    gap: 20px !important;
-    width: 100%;
+    display: flex;
+    flex-direction: column !important;
+    align-items: center;
+    text-align: center;
   }
 
-  .ave {
-    flex: none !important;      /* Stops it from trying to fill horizontal space */
-    margin: 10px 0 20px 0 !important; /* Removes the 40pt right margin and centers it */
-    width: 70px;                /* Slightly smaller for mobile */
-    height: 70px;
-    order: 4;                   /* Optional: Ensures it appears after the chart */
+  /* 1. Art stays at top */
+  .artandedit {
+    order: 1;
   }
 
-  .chartupdate {
-    width: 100%;
-    margin-top: 10px !important;
-    order: 3;                   /* Keeps chart above the score */
-  }
-
+  /* 2. Titles come second */
   .titles {
-    margin-left: 0 !important;  /* Removes that 30pt push from desktop */
     order: 2;
+    margin-left: 0 !important;
+    margin-bottom: 5px; /* Tighten space for the score */
   }
 
+  /* 3. Average Score jumps here (Under Titles) */
+  .ave {
+    order: 3;
+    margin: 0 auto 20px auto !important; /* Centers it and adds space below */
+    flex: none !important;
+  }
+
+  /* 4. Chart goes to the bottom */
+  .chartupdate {
+    order: 4;
+    width: 100%;
+  }
+
+  .bar-chart {
+    margin: 0 auto !important;
+  }
+}
   .artandedit {
     order: 1;
   }
