@@ -111,6 +111,8 @@ h1:hover {
 
 /* 5. THE FORM SECTION (Positioned top right) */
 .form-section {
+  display:flex;
+  flex-direction:center;
   position: absolute;
   right: 40pt;
   top: 50px; 
