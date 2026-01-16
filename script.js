@@ -12,6 +12,8 @@ function init() {
   const container = document.getElementById('cardContainer');
   container.innerHTML = "<p style='color:white; letter-spacing:3px; text-align:center;'>FETCHING DATA...</p>";
 
+  document.getElementById('btn-col').classList.add('active-glow');
+  document.getElementById('btn-arc').classList.remove('active-glow');
   fetch(scriptURL)
     .then(res => res.json())
     .then(data => {
