@@ -150,20 +150,36 @@ function renderCards(data) {
 
     card.innerHTML = `
       <div class="card-content">
-        <img src="${item.Art || placeholder}" class="album-art" id="${imgId}" crossorigin="anonymous">
-        <div class="titles">
-          <h3>${item.Artist || ''}</h3>
-          <h4>${item.Album || ''}</h4>
-        </div>
-        <div class="bar-chart">${barsHTML}</div>
-        <div class="ave" style="background: ${avgColor};">${item.avgScore}</div>
-        <div class="art-edit-wrapper">
-          <button class="edit-art-btn" onclick="editArtURL(${item.originalRow})">Edit Art</button>
-        </div>
-        <button class="save-card-btn" onclick="saveCardUpdate(${item.originalRow}, this)">Update</button>
-        <button class="delete-btn" onclick="confirmDelete(${item.originalRow})">x</button>
-      </div>
-    `;
+      
+  <div class="artandedit">  
+  <div class="metaname">
+  ${item.Chooser}
+  </div>
+    <img src="${item.Art || placeholder}" class="album-art" id="${imgId}" crossorigin="anonymous">
+     <button class="edit-art-btn" onclick="editArtURL(${item.originalRow})">Edit Art</button>
+    </div>
+    
+    <div class="titles">
+      <h3>${item.Artist || ''}</h3>
+      <h4>${item.Album || ''}</h4>
+     
+    </div>
+ 
+ 
+ <div class="chartupdate">
+    <div class="bar-chart">${barsHTML}</div>
+     <button class="save-card-btn" onclick="saveCardUpdate(${item.originalRow}, this)">Update</button>
+</div>
+
+
+    <div class="card-actions">
+      <div class="ave" style="background: ${avgColor};">${item.avgScore}</div>
+     
+    </div>
+
+    <button class="delete-btn" onclick="confirmDelete(${item.originalRow})">x</button>
+  </div>
+`;
     container.appendChild(card);
 
     // iTunes Color Sampling
