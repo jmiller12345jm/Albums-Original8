@@ -148,11 +148,12 @@ function renderCards(data) {
         </div>
       `;
     });
-
+    const dateID = `release-date-${index}`;
     const imgId = `album-art-${index}`;
     const placeholder = "https://cdn-icons-png.flaticon.com/512/26/26356.png";
     const searchTerm = `${item.Artist} ${item.Album}`.trim();
     const avgColor = getBarColor(item.avgScore);
+    const releaseplaceholder = 'Date';
 
     card.innerHTML = `
       <div class="card-content">
@@ -185,6 +186,12 @@ function renderCards(data) {
 
     <button class="delete-btn" onclick="confirmDelete(${item.originalRow})">x</button>
   </div>
+
+
+
+  <div class="releaseDate" id=${dateID} >
+    ${item.Release ||releaseplaceholder}
+    </div>
 `;
     container.appendChild(card);
 
@@ -200,7 +207,7 @@ function renderCards(data) {
         card.style.borderColor = `rgba(${rgb}, 0.2)`;
       } catch (e) { console.warn("ColorThief blocked"); }
     };
-    
+    const dateEL = = document.getElementById(dateID);
     // Fetch iTunes art if column is empty
     if (!item.Art && searchTerm) {
       fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(searchTerm)}&entity=album&limit=1`)
@@ -208,6 +215,7 @@ function renderCards(data) {
         .then(result => {
           if (result.results.length > 0) {
             img.src = result.results[0].artworkUrl100.replace('100x100bb', '600x600bb');
+            dateEl.textContent =result.results[0].releaseDate.substring(0,10);
           }
         });
     }
