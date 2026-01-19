@@ -165,7 +165,7 @@ function renderCards(data) {
     <img src="${item.Art || placeholder}" class="album-art" id="${imgId}" crossorigin="anonymous">
      <button class="edit-art-btn" onclick="editArtURL(${item.originalRow})">Edit Art</button>
   <div class="releaseDate" id=${dateID} >
-    ${item.Release ||releaseplaceholder}
+    ${item.Release.substring(0,10) ||releaseplaceholder}
     </div>
     </div>
     
@@ -295,6 +295,19 @@ fetch(baseScriptURL, { // Use baseScriptURL for POST
     // Give Google a second to process before refreshing
     setTimeout(() => init(), 500);
   });
+}
+
+
+
+function editreleaseDate(rowNumber) {
+  const newreleaseDate =prompt ("YYYY-MM-DD");
+  if (!newreleaseDate) return;
+  fetch(scriptURL, {
+    method: 'POST',
+    mode: 'no-cors',
+    body: JSON.stringify({action: "updatereleaseDate", row:rowNumber, relDate: newreleaseDate})
+  }).then(() => init());
+  
 }
 
 // 7. EVENT LISTENERS
