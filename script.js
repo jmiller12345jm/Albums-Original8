@@ -207,7 +207,7 @@ function renderCards(data) {
         card.style.borderColor = `rgba(${rgb}, 0.2)`;
       } catch (e) { console.warn("ColorThief blocked"); }
     };
-    const dateEL = = document.getElementById(dateID);
+    const dateEl = document.getElementById(dateID);
     // Fetch iTunes art if column is empty
     if (!item.Art && searchTerm) {
       fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(searchTerm)}&entity=album&limit=1`)
