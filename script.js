@@ -164,6 +164,9 @@ function renderCards(data) {
   </div>
     <img src="${item.Art || placeholder}" class="album-art" id="${imgId}" crossorigin="anonymous">
      <button class="edit-art-btn" onclick="editArtURL(${item.originalRow})">Edit Art</button>
+  <div class="releaseDate" id=${dateID} >
+    ${item.Release ||releaseplaceholder}
+    </div>
     </div>
     
     <div class="titles">
@@ -187,11 +190,6 @@ function renderCards(data) {
     <button class="delete-btn" onclick="confirmDelete(${item.originalRow})">x</button>
   </div>
 
-
-
-  <div class="releaseDate" id=${dateID} >
-    ${item.Release ||releaseplaceholder}
-    </div>
 `;
     container.appendChild(card);
 
