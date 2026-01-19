@@ -67,6 +67,7 @@ if(dropdown) {ratingCategories.forEach(cat => {
   if (sortSelect) {
     // Keep the defaults, then add categories
     sortSelect.innerHTML = `
+      <option value="Release">Release Date</option>
       <option value="newest">Newest Added</option>
       <option value="highest">Overall Average</option>
     `;
@@ -113,7 +114,21 @@ function renderCards(data) {
     processedData.reverse();
   } else if (currentSort === 'highest') {
     processedData.sort((a, b) => b.avgScore - a.avgScore);
-  } else {
+  }
+  
+   else if (currentSort === 'Release') {
+  processedData.sort((a, b) => {
+    // 1. Convert the strings into actual Date objects
+    // If a.Release is empty, we use a very old date (0) as a fallback
+    const dateA = a.Release ? new Date(a.Release) : 0;
+    const dateB = b.Release ? new Date(b.Release) : 0;
+    
+    // 2. Subtract the dates (Newest to Oldest)
+    return dateB - dateA; 
+  });
+}
+  
+  else {
     // Sort by specific header name (e.g., "Production")
     processedData.sort((a, b) => {
       let valA = Number(a[currentSort]) || 0;
