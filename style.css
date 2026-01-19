@@ -449,6 +449,7 @@ button[type="submit"]:disabled {
   color: #666;
   padding: 10px;
   border-radius: 6px;
+   appearance: none;
 }
 
 /* The Submit Button on the right */
