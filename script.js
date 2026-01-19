@@ -162,8 +162,14 @@ function renderCards(data) {
   <div class="metaname">
   ${item.Chooser}
   </div>
+
     <img src="${item.Art || placeholder}" class="album-art" id="${imgId}" crossorigin="anonymous">
-     <button class="edit-art-btn" onclick="editArtURL(${item.originalRow})">Edit Art</button>
+    
+    <div>
+    <button class="edit-art-btn" onclick="editArtURL(${item.originalRow})">Edit Art</button>
+ <button class="edit-releaseDate-btn" onclick="editreleaseDate(${item.originalRow})">Edit Date
+    </div>
+
   <div class="releaseDate" id=${dateID} >
     ${item.Release.substring(0,10) ||releaseplaceholder}
     </div>
