@@ -67,8 +67,9 @@ if(dropdown) {ratingCategories.forEach(cat => {
   if (sortSelect) {
     // Keep the defaults, then add categories
     sortSelect.innerHTML = `
-      <option value="Release">Release Date</option>
+     
       <option value="newest">Newest Added</option>
+       <option value="Release">Release Date</option>
       <option value="highest">Overall Average</option>
     `;
     ratingCategories.forEach(cat => {
