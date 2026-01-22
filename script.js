@@ -4,7 +4,7 @@ const collectionURL = baseScriptURL + '?sheet=albums2026' ; // Change 'Sheet1' t
 const archiveURL    = baseScriptURL + '?sheet=Sheet3';
 
 let scriptURL = collectionURL; 
-let currentSort = 'Release'; 
+let currentSort = 'newest'; 
 let globalData = [];
 
 // 2. INITIALIZATION
