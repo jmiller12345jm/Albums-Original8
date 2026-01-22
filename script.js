@@ -235,13 +235,28 @@ function renderCards(data) {
         .then(result => {
           if (result.results.length > 0) {
             img.src = result.results[0].artworkUrl100.replace('100x100bb', '600x600bb');
-            dateEl.textContent =result.results[0].releaseDate.substring(0,10);
+            itunesDate = result.results[0].releaseDate.substring(0,10);
+             dateEl.textContent =itunesDate
+            
+            const currentSheet = scriptURL.includes('Sheet3') ? 'Sheet3' : 'albums2026';
+            // 3. Automatically update the Google Sheet
+        fetch(baseScriptURL, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: JSON.stringify({
+            action: "updatereleaseDate",
+            row: item.originalRow,
+            relDate: iTunesDate,
+            sheetMode: currentSheet
+          })
+        }).then(() => {
+          console.log(`Auto-updated date for row ${item.originalRow}`);
+        });
           }
         });
     }
   });
 }
-
 // 6. HELPER FUNCTIONS
 function getBarColor(val) {
   if (val >= 95) return "linear-gradient(to top, #2ecc71, #bc13fe)";
