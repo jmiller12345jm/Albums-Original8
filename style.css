@@ -84,7 +84,7 @@ h1:hover {
 /* 4. FILTERS (Now aligned left under title) */
 .filter-controls {
   position: absolute;
-  bottom: 2pt;
+  bottom: 0pt;
   left: 20pt;
   display: flex;
   gap: 20px;
@@ -439,6 +439,8 @@ button[type="submit"]:disabled {
   color: #666;
   padding: 10px;
   border-radius: 6px;
+  align-items: center;
+  text-align:center;
 }
 
 .horizontal-form select, 
@@ -450,6 +452,8 @@ button[type="submit"]:disabled {
   padding: 10px;
   border-radius: 6px;
    appearance: none;
+  align-items: center;
+  text-align:center;
 }
 
 /* The Submit Button on the right */
@@ -519,13 +523,13 @@ display: flex;
   color: #ffffff;
   border: none;
   padding: 0;
-  font-size: 11px;
+  font-size: 10px;
   cursor: pointer;
   outline: none;
   letter-spacing: 2px;
   appearance: none;
   /* ADD: Explicitly set height/line-height to match the label */
-  line-height: 1;
+
   text-transform: uppercase; /* Optional: makes it match the label style */
 }
 
