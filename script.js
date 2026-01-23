@@ -190,13 +190,11 @@ function renderCards(data) {
     ${item.Release.substring(0,10) ||releaseplaceholder}
     </div>
     </div>
-    
-    <div class="titles">
+   <div class="titles">
       <h3>${item.Artist || ''}</h3>
       <h4>${item.Album || ''}</h4>
-     
-    </div>
- 
+      <button class="comments">  "${item.Comment  || "..."}"-Luke's hot take</button>
+      </div>
  
  <div class="chartupdate">
     <div class="bar-chart">${barsHTML}</div>

@@ -165,6 +165,22 @@ h1:hover {
   margin-left:30pt;
   min-width: 250px;
 }
+
+.comments {
+   background:transparent;
+  border:none;
+  font-size:10pt;
+  margin-top:50pt;
+  margin-left:20pt;
+  color:#666;
+  transition:0.5s;
+}
+
+.comments:hover{color:gold}
+
+
+
+
 .card-content {
   display: flex;
   flex-direction: row;   /* Keeps Art, Titles, and Chart in a line */
@@ -174,7 +190,7 @@ h1:hover {
   width: 100%;
 }
 
-.titles:hover {color:#ffffff;
+.titles:hover:not(has:.comments:hover) {color:#ffffff;
 scale:1.05;
  text-shadow: 0 0 2px rgba(255, 255, 255, 0.8), 
    0 0 2px rgba(255, 255, 255, 0.4);}
@@ -598,6 +614,8 @@ display: flex;
     padding: 0 !important;
     flex: none !important;              /* Prevents uneven stretching */
   }
+
+  .comments {margin-top:20pt}
 
   .titles h3, .titles h4 {
     text-align: center !important;
