@@ -57,7 +57,7 @@ function setupDropdown(headers) {
   dropdown.innerHTML = '<option value="">Chooser</option>';
   
   // Rating columns (adjust slice if headers change)
-  const ratingCategories = headers.slice(6, 20);
+  const ratingCategories = headers.slice(7, 20);
 if(dropdown) {ratingCategories.forEach(cat => {
     const option = document.createElement('option');
     option.value = cat;
@@ -90,12 +90,12 @@ function renderCards(data) {
   if (data.length === 0) return;
 
   const allKeys = Object.keys(data[0]);
-  const ratingKeys = allKeys.slice(6, 15); 
+  const ratingKeys = allKeys.slice(7, 20); 
 
   // Process data for Sorting and Decimal Fix
  let processedData = data.map((item, index) => {
     const allKeys = Object.keys(data[0]);
-    const ratingKeys = allKeys.slice(6, 15);
+    const ratingKeys = allKeys.slice(7, 20);
     
     const ratings = ratingKeys.map(key => {
       let val = Number(item[key]) || 0;
