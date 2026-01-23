@@ -10,7 +10,7 @@ let globalData = [];
 // 2. INITIALIZATION
 function init() {
   const container = document.getElementById('cardContainer');
-  container.innerHTML = "<p style='color:white; letter-spacing:3px; text-align:center;'>FETCHING DATA...</p>";
+  container.innerHTML = "<p style='color:white; letter-spacing:3px; text-align:center;'>Loading...</p>";
 if (scriptURL.includes('Sheet3')) {
     // We are in Archive (2025)
     document.getElementById('btn-arc').classList.add('active-glow');
