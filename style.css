@@ -164,6 +164,11 @@ h1:hover {
   text-align: center;
   margin-left:30pt;
   min-width: 250px;
+  display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;    /* Centers items horizontally */
+    justify-content: center !important; /* Centers items vertically */
+    text-align: center !important;      /* Centers the text lines */
 }
 
 .comments {
