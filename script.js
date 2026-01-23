@@ -193,7 +193,7 @@ function renderCards(data) {
    <div class="titles">
       <h3>${item.Artist || ''}</h3>
       <h4>${item.Album || ''}</h4>
-      <button class="comments">  "${item.Comment  || "..."}"-Luke's hot take</button>
+      <button class="comments" onclick="addcomment(${item.originalRow})">  "${item.Comment  || "..."}"-Luke's hot take</button>
       </div>
  
  <div class="chartupdate">
@@ -343,6 +343,19 @@ function editreleaseDate(rowNumber) {
     body: JSON.stringify({action: "updatereleaseDate", row:rowNumber, relDate: newreleaseDate})
   }).then(() => init());
   
+}
+
+
+
+
+function addcomment(rowNumber) {
+  const newcomment= prompt("hot take")
+  if (!newcomment) return;
+  fetch(scriptURL, {
+    method: 'POST',
+    mode: 'no-cors',
+    body: JSON.stringify({action: "updateComment", row:rowNumber, newC: newcomment})
+  }).then(() => init());
 }
 
 // 7. EVENT LISTENERS
