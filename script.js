@@ -234,7 +234,7 @@ function renderCards(data) {
           if (result.results.length > 0) {
             img.src = result.results[0].artworkUrl100.replace('100x100bb', '600x600bb');
             itunesDate = result.results[0].releaseDate.substring(0,10);
-             dateEl.textContent =itunesDate
+            if(!item.Release)  {dateEl.textContent =itunesDate}
             
             const currentSheet = scriptURL.includes('Sheet3') ? 'Sheet3' : 'albums2026';
             // 3. Automatically update the Google Sheet
