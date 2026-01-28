@@ -96,7 +96,7 @@ h1:hover {
 
 .aveCard {
   padding: 8px 12px;
-  border-radius: 6px;
+  border-radius: 10px;
   text-align: center;
   min-width: 80px;
 }
@@ -622,6 +622,12 @@ display: flex;
     align-items: center;
     text-align: center;
   }
+
+    #averagesforall {
+margin-top:50px;
+    gap:30px;
+}
+ 
 
   /* 1. Art stays at top */
   .artandedit {
