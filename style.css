@@ -81,6 +81,28 @@ h1:hover {
   color: #666;
 }
 
+
+
+
+#averagesforall {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 240px;
+  min-height: 50px; /* Ensures the area has space */
+  width: 100%;
+}
+
+.aveCard {
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-align: center;
+  min-width: 80px;
+}
+
+
+
 /* 4. FILTERS (Now aligned left under title) */
 .filter-controls {
   position: absolute;
@@ -128,7 +150,7 @@ h1:hover {
   display: flex;
   flex-direction: column;
   gap: 30px;
-  margin-top: 250px; /* This margin clears the fixed header */
+  margin-top: 50px; /* This margin clears the fixed header */
   width: 100%;
   align-items: center;
   padding-bottom: 20px;
