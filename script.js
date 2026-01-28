@@ -28,6 +28,7 @@ if (scriptURL.includes('Sheet3')) {
         setupDropdown(Object.keys(data[0]));
       }
       renderCards(data);
+      renderAves(data);
     })
     .catch(err => {
       console.error("Fetch Error:", err);
@@ -78,6 +79,68 @@ if(dropdown) {ratingCategories.forEach(cat => {
     });
   }
 }
+
+
+
+function renderAves(data) {
+  const avesContainer =document.getElementById('averagesforall');
+   if (!avesContainer || data.length === 0) return;
+  avesContainer.innerHTML = "";
+
+
+  const allKeys = Object.keys(data[0]);
+  const ratingKeys = allKeys.slice(7, 20); 
+  
+  ratingKeys.forEach ( key => {
+    let count = 0;
+    let total = 0;
+    
+    data.forEach( item => {
+     
+     let rawVal = item[key];
+      // Only count if cell is not empty and is a number > 0
+      if (rawVal !== "" && rawVal !== null && !isNaN(rawVal)) {
+        let val = Number(rawVal);
+        if (val > 0) {
+          if (val <= 10) val *= 10;
+          total += val;
+          count++;
+        }
+      }
+    
+    
+  });
+  
+    
+    const aveScorepres = count > 0 ? Math.round(total / count): 0;
+    
+    const color = getBarColor(aveScorepres);
+    
+     const aveCard = document.createElement('div');
+     aveCard.className = 'aveCard'
+     aveCard.style.background = color;     
+     aveCard.style.boxShadow= `0 4px 15px rgba(0, 0, 0, 0.3)`;
+     aveCard.innerHTML = `
+   
+     <p style="margin:0; font-size:10px; opacity:0.8;">${key}</p>
+     <p style="margin:0; font-size:20px; font-weight:bold;">${aveScorepres} </p>
+     <p style ="font-size:10px">${count}</p>
+   
+     `
+         
+     
+     avesContainer.appendChild(aveCard);
+                                      
+  });   
+                                      
+                                      }
+
+
+
+
+
+
+
 
 // 5. RENDER CARDS
 function renderCards(data) {
@@ -244,7 +307,7 @@ function renderCards(data) {
           body: JSON.stringify({
             action: "updatereleaseDate",
             row: item.originalRow,
-            relDate: iTunesDate,
+            relDate: itunesDate,
             sheetMode: currentSheet
           })
         }).then(() => {
