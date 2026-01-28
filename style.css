@@ -229,12 +229,13 @@ border-radius:10pt;
 }
 
 
-.glow-text-btn:hover {color:#ffffff}
+.glow-text-btn:hover {color:#ffffff;
+text-shadow: 0 0 10px gold;}
 .glow-text-btn.active {color:#ffffff}
 
 .active-glow {
   color: #fff !important;
-  text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
+  text-shadow: 0 0 1px gold;
   transform: scale(1.1);
   transition: all 0.3s ease;
 }
