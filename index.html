@@ -1,8 +1,7 @@
-<head><link rel="stylesheet" href="style.css">
-<script src="script.js" defer></script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
 <div class="topofscreen">
+ 
+   <div class ="titleyearsform">
+        <div class = "titleyears"> 
   <h1>Albums</h1>
 
   <div class="page-nav">
@@ -10,7 +9,8 @@
     <button onclick="switchSheet('archive')" id="btn-arc" class="nav-btn">2025</button>
   </div>
 
-  <section class="form-section">
+  </div>
+        <section class="form-section">
     <form id="reviewForm" class="horizontal-form">
       <input type="text" name="Artist" placeholder="Artist" required>
       <input type="text" name="Album" placeholder="Album" required>
@@ -21,21 +21,31 @@
     </form>
     <div id="status"></div>
   </section>
-
+  </div>
+   
+  
+  <div class="sortrefresh">
   <div class="filter-controls">
     <label for="sortSelect" class="filter-label">SORT BY:</label>
-    <select id="sortSelect" class="sort-dropdown">
- 
-      <option value="newest">Newest Added</option>
-             <option value="Release">Release Date</option>
-      <option value="highest">Overall Average</option>
-    </select>
+        <select id="sortSelect" class="sort-dropdown">
+          <option value="Release">Release Date</option>
+          <option value="newest">Newest Added</option>
+          <option value="highest">Overall Average</option>
+        
+      </select>
+     </div>
+     
     <button id="refreshBtn" class="glow-text-btn" onclick="manualRefresh()">REFRESH</button>
   </div>
+
+
+
 </div>
+    
+ 
 
 <section class="display-section">
-  <div class="averages" id="averagesforall">
+ <div class="averages" id="averagesforall">
   </div>
   <div id="cardContainer">
     <p class="loading-text">Refreshing...</p>
