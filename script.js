@@ -258,7 +258,33 @@ function renderCards(data) {
     const imgId = `album-art-${index}`;
     const placeholder = "https://cdn-icons-png.flaticon.com/512/26/26356.png";
     const searchTerm = `${item.Artist} ${item.Album}`.trim();
-    const avgColor = getBarColor(item.avgScore);
+    
+    
+  
+  let allScores = [];
+  ratingKeys.forEach(key => {
+    data.forEach(item => {
+      let val = Number(item[key]);
+      if (val > 0) {
+        if (val <= 10) val *= 10;
+        allScores.push(val);
+      }
+    });
+  });
+  
+  
+  const mean = allScores.reduce((a, b) => a + b, 0) / allScores.length;
+      const squareDiffs = allScores.map(score => Math.pow(score - mean, 2));
+  const avgSquareDiff = squareDiffs.reduce((a, b) => a + b, 0) / squareDiffs.length;
+  const stdDev = Math.sqrt(avgSquareDiff);
+  
+    
+    
+     const zScore = stdDev > 0 ? (item.avgScore - mean) / stdDev : 0;
+    const colorValue = Math.max(0, Math.min(100, 75 + (zScore * 12)));
+    
+    
+    const avgColor = getBarColor(colorValue);
     const releaseplaceholder = 'Date';
 
     card.innerHTML = `
