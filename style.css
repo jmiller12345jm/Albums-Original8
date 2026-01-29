@@ -404,6 +404,7 @@ text-shadow: 0 0 10px gold;}
   width: 100%;
   align-items: center;
   padding-bottom: 20px;
+   box-sizing: border-box;
 }
 
 .card {
@@ -424,7 +425,9 @@ text-shadow: 0 0 10px gold;}
   box-sizing: border-box; /* Ensures padding doesn't push it off-screen */
   height: auto;          /* Let height adjust to content */
   min-height: 230pt;
- 
+  margin-left: auto;     /* These two lines are the "ultimate" centering backup */
+  margin-right: auto;
+  box-sizing: border-box;
 }
 
 .hover-glow-backdrop {
