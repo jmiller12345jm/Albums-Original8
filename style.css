@@ -324,12 +324,12 @@ text-shadow: 0 0 10px gold;}
 
 .card:hover .hover-glow-backdrop {
  opacity: 0.8;
-  transform: scale(1.1);
+  transform: scale(1.01);
 }
 
 .card:hover {
   transform: translateY(-5px);
-  border-color: rgba(255, 255, 255, 0.5); /* Semi-white border works with any color */
+  border-color: rgba(255, 255, 255, 0.5); 
 }
 
 .card-content {
