@@ -285,8 +285,6 @@ function renderCards(data) {
         const colorThief = new ColorThief();
         const color = colorThief.getColor(img);
         const rgb = `${color[0]}, ${color[1]}, ${color[2]}`;
-        card.style.boxShadow = `0 10px 40px rgba(${rgb}, 0.4)`;
-        card.style.borderColor = `rgba(${rgb}, 0.2)`;
 
         card.style.setProperty('--glow-color', rgb);
       } catch (e) { console.warn("ColorThief blocked"); }
