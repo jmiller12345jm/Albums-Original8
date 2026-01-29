@@ -379,7 +379,7 @@ text-shadow: 0 0 10px gold;}
 
 
 .aveCard {
-  padding: 8px 8px 8px 8px;
+  padding: 8px 8px 0px 8px;
   border-radius: 20px;
   text-align: center;
   min-width: 50pt;
