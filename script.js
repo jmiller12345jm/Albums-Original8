@@ -122,9 +122,9 @@ function renderAves(data) {
      aveCard.style.boxShadow= `0 4px 15px rgba(0, 0, 0, 0.3)`;
      aveCard.innerHTML = `
    
-     <p style="margin:0; font-size:10px; opacity:0.8;">${key}</p>
-     <p style="margin:0; font-size:20px; font-weight:bold;">${aveScorepres} </p>
-     <p style ="font-size:10px">${count}</p>
+    <p class="aveNames">${key}</p>
+     <p class="aveScores">${aveScorepres} </p>
+     <p class ="aveCount">${count}</p>
    
      `
          
