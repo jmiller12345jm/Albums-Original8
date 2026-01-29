@@ -254,6 +254,7 @@ text-shadow: 0 0 10px gold;}
   width: 100%;
 }
 
+
 .aveCard {
   padding: 8px 8px 8px 8px;
   border-radius: 20px;
@@ -261,7 +262,8 @@ text-shadow: 0 0 10px gold;}
   min-width: 50pt;
   min-height:50pt
 }
-.aveNames {margin:0; font-size:12px; opacity:0.8;}
+.aveNamesL {margin:0; font-size:12px; opacity:0.8;}
+.aveNamesS{ display:none}
 .aveScores {margin:0; font-size:20px; font-weight:bold}
 .aveCount {margin:0; font-size:10px; font-weight:bold}
 
@@ -656,6 +658,22 @@ display: flex;
 margin-top:50px;
     gap:30px;
 }
+
+  .aveCard {
+  padding: 8px 0px 8px 0px;
+  border-radius: 10px;
+  text-align: center;
+  min-width: 50px;
+  min-height:30pt;
+}
+  
+  
+  .aveNamesS {
+    margin:0; font-size:12px; opacity:0.8;
+  display: inline;
+    text-transform: uppercase; /* Makes 3 letters look like a cool badge */
+    font-weight: bold;}
+.aveNamesL{ display:none}
  
 
   /* 1. Art stays at top */
