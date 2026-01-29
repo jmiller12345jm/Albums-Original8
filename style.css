@@ -784,6 +784,14 @@ display: flex;
   transition: all 0.3s ease;
 }
 @media (max-width: 768px) {
+
+
+  body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    overflow-x: hidden;
+  }
   .card-content {
     flex-direction: column; /* Stacks everything vertically */
     text-align: center;
@@ -878,12 +886,15 @@ margin-top:0px;
 .topofscreen {
     position:relative;    /* Keep it sticky */
     height: 80pt !important; /* Let it expand to fit stacked items */
-    padding: 10px !important;
+    padding: 10px 0 !important;
     display: flex;
     flex-direction: column;
     align-items: center;
    border-bottom:none;
     gap: 10px;
+  margin: 0 auto !important;
+    left: 0;
+    box-sizing: border-box;
   }
 
   .titleyearsform {flex-direction:column;
@@ -963,8 +974,11 @@ margin-top:0px;
     padding: 12px;
   }
 
-  #cardContainer {
-    margin-top: 20px !important; /* Adjust this number if your header gets taller */
+#cardContainer {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    align-items: center; /* This is the key centering command */
   }
   
   .formcardbtn {margin-top:10pt;
@@ -972,4 +986,12 @@ margin-top:0px;
 
 
   .delete-btn {top:2%}
+
+
+  .display-section {
+    width: 100%;
+    margin-top: 20px !important; /* Adjusted for relative header */
+    padding: 0 !important;
+    align-items: center;
+  }
 }}
