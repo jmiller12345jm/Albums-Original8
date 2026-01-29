@@ -309,7 +309,9 @@ text-shadow: 0 0 10px gold;}
 
 .card:hover {
   transform: translateY(-10px);
-  box-shadow: 0px 0px 25px 0px #ffffff;
+  background: rgba(var(--glow-color), 0.05); 
+  border-color: rgba(var(--glow-color), 0.8);
+  box-shadow: 0 15px 50px rgba(var(--glow-color), 0.6);
 }
 
 /* ... (Keep your bar-chart, ave, and titles CSS as they were) ... */
