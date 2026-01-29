@@ -371,7 +371,7 @@ text-shadow: 0 0 10px gold;}
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  margin-top: 0; /* REMOVE the 250px margin you had here before */
+  margin-top: 40px; /* REMOVE the 250px margin you had here before */
   margin-bottom: 0px;
   min-height: 50px;
   width: 100%;
@@ -890,7 +890,8 @@ margin-top:0px;
   .sortrefresh { margin-bottom:10pt;
   align-items:center;}
   
-  glow-text-btn {border:none}
+  glow-text-btn {border:none;
+                margin-right:0px}
   
   h1 {
     flex:1;
@@ -963,5 +964,6 @@ margin-top:0px;
     margin-top: 20px !important; /* Adjust this number if your header gets taller */
   }
   
-  .formcardbtn {margin-top:10pt}
+  .formcardbtn {margin-top:10pt;
+               margin-right:0px}
 }}
