@@ -337,6 +337,15 @@ text-shadow: 0 0 10px gold;}
   z-index: 1;
 }
 
+
+
+.card:hover .metaname{color:#ffffff}
+.card:hover .save-card-btn{color:#ffffff}
+.card:hover .comments{color:#ffffff}
+.card:hover .edit-releaseDate-btn{color:#ffffff}
+.card:hover .edit-art-btn{color:#ffffff}
+.card:hover .releaseDate{color:#ffffff}
+
 /* ... (Keep your bar-chart, ave, and titles CSS as they were) ... */
 .titles {
   flex: 0.5;               /* Takes up available space */
@@ -373,10 +382,7 @@ text-shadow: 0 0 10px gold;}
   width: 100%;
 }
 
-.titles:hover:not(has:.comments:hover) {color:#ffffff;
-scale:1.05;
- text-shadow: 0 0 2px rgba(255, 255, 255, 0.8), 
-   0 0 2px rgba(255, 255, 255, 0.4);}
+
 
 .titles h3, .titles h4 {
   margin: 10pt;
@@ -400,7 +406,7 @@ text-align:center;
 
 .releaseDate {color:#666;font-size: 16px;
   text-transform: uppercase;
-  transition: 2s;
+  transition: 0.5s;
 }
 .releaseDate:hover {color:#ffffff}
 
@@ -413,7 +419,7 @@ text-align:center;
   text-transform: uppercase;
   cursor: pointer;
   letter-spacing: 1px;
-  transition: color 0.2s;
+  transition: color 0.5s;
 }
 
 .edit-releaseDate-btn:hover {
@@ -446,7 +452,7 @@ margin-right:40pt;}
   text-transform: uppercase;
   cursor: pointer;
   letter-spacing: 2px;
-  transition: color 0.2s;
+  transition: color 0.5s;
 }
 .metaname:hover {color:#ffffff}
 
@@ -473,7 +479,7 @@ display: flex;
   text-transform: uppercase;
   cursor: pointer;
   letter-spacing: 1px;
-  transition: color 0.2s;
+  transition: color 0.5s;
 }
 
 .save-card-btn:hover { color: #ffffff; 
