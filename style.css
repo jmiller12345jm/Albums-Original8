@@ -305,7 +305,6 @@ text-shadow: 0 0 10px gold;}
   box-sizing: border-box; /* Ensures padding doesn't push it off-screen */
   height: auto;          /* Let height adjust to content */
   min-height: 230pt;
-   --glow-color: 255, 255, 255;
 }
 
 .hover-glow-backdrop {
@@ -318,7 +317,7 @@ text-shadow: 0 0 10px gold;}
   transition: opacity 0.4s ease;
   z-index: -1; /* Behind everything */
   pointer-events: none; /* So it doesn't interfere with clicking buttons */
-  border-radius: 50%;
+  border-radius: 0%;
 }
 
 
