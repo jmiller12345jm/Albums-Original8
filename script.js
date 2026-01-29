@@ -316,7 +316,7 @@ function renderCards(data) {
    <div class="titles">
       <h3>${item.Artist || ''}</h3>
       <h4>${item.Album || ''}</h4>
-      <button class="comments" onclick="addcomment(${item.originalRow})">  "${item.Comment  || "No comment"}"</button>
+      <button class="comments" onclick="addcomment(${item.originalRow})">  ${item.Comment  || ""}</button>
       </div>
  
  <div class="chartupdate">
