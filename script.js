@@ -177,7 +177,9 @@ function renderCards(data) {
   // 2. NEW DYNAMIC SORT LOGIC
   if (currentSort === 'newest') {
     processedData.reverse();
-  } else if (currentSort === 'highest') {
+  } 
+  
+  else if (currentSort === 'highest') {
     processedData.sort((a, b) => b.avgScore - a.avgScore);
   }
   
@@ -191,7 +193,7 @@ function renderCards(data) {
     // 2. Subtract the dates (Newest to Oldest)
     return dateB - dateA; 
   });
-}
+   }
   
   else {
     // Sort by specific header name (e.g., "Production")
@@ -236,8 +238,9 @@ function renderCards(data) {
     const releaseplaceholder = 'Date';
 
     card.innerHTML = `
+      <div class="hover-glow-backdrop" crossorigin="anonymous" style="background-image: url('${item.Art || placeholder}')"></div>
       <div class="card-content">
-      
+    
   <div class="artandedit">  
   <div class="metaname">
   ${item.Chooser}
@@ -285,40 +288,56 @@ function renderCards(data) {
         const colorThief = new ColorThief();
         const color = colorThief.getColor(img);
         const rgb = `${color[0]}, ${color[1]}, ${color[2]}`;
-
-        card.style.setProperty('--glow-color', rgb);
+      card.style.setProperty('--glow-color', rgb);
       } catch (e) { console.warn("ColorThief blocked"); }
     };
     const dateEl = document.getElementById(dateID);
     // Fetch iTunes art if column is empty
-    if (!item.Art && searchTerm) {
+  if (!item.Art && searchTerm) {
       fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(searchTerm)}&entity=album&limit=1`)
         .then(res => res.json())
         .then(result => {
           if (result.results.length > 0) {
-            img.src = result.results[0].artworkUrl100.replace('100x100bb', '600x600bb');
-            itunesDate = result.results[0].releaseDate.substring(0,10);
-            if(!item.Release)  {dateEl.textContent =itunesDate}
+            // 1. Define the URL clearly so we can use it twice
+            const foundArt = result.results[0].artworkUrl100.replace('100x100bb', '600x600bb');
+            const foundDate = result.results[0].releaseDate.substring(0, 10);
+            
+            // 2. Update the screen immediately
+            img.src = foundArt;
+            if (!item.Release) { dateEl.textContent = foundDate; }
             
             const currentSheet = scriptURL.includes('Sheet3') ? 'Sheet3' : 'albums2026';
-            // 3. Automatically update the Google Sheet
-        fetch(baseScriptURL, {
-          method: 'POST',
-          mode: 'no-cors',
-          body: JSON.stringify({
-            action: "updatereleaseDate",
-            row: item.originalRow,
-            relDate: itunesDate,
-            sheetMode: currentSheet
-          })
-        }).then(() => {
-          console.log(`Auto-updated date for row ${item.originalRow}`);
-        });
-          }
-        });
-    }
-  });
-}
+
+            // 3. Update Release Date in Google Sheet
+            fetch(baseScriptURL, {
+              method: 'POST',
+              mode: 'no-cors',
+              body: JSON.stringify({
+                action: "updatereleaseDate",
+                row: item.originalRow,
+                relDate: foundDate,
+                sheetMode: currentSheet
+              })
+            });
+
+            // 4. Update Art URL in Google Sheet
+            fetch(baseScriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: JSON.stringify({
+                    action: "updateArt", 
+                    row: item.originalRow,
+                    artUrl: foundArt, // FIXED: Now matches the variable above
+                    sheetMode: currentSheet
+                })
+            }).then(() => {
+              console.log(`Auto-saved art and date for row ${item.originalRow}`);
+            }); // Closes the updateArt fetch .then
+          } // Closes if (result.results.length > 0)
+        }); // Closes the iTunes fetch .then
+    } // Closes if (!item.Art && searchTerm)
+  }); // Closes processedData.forEach loop
+} 
 // 6. HELPER FUNCTIONS
 function getBarColor(val) {
   if (val >= 95) return "linear-gradient(to top, #2ecc71, #bc13fe)";
