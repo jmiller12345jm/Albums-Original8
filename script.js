@@ -91,10 +91,35 @@ function renderAves(data) {
   const allKeys = Object.keys(data[0]);
   const ratingKeys = allKeys.slice(7, 20); 
   
+
+  
+  let allScores = [];
+  ratingKeys.forEach(key => {
+    data.forEach(item => {
+      let val = Number(item[key]);
+      if (val > 0) {
+        if (val <= 10) val *= 10;
+        allScores.push(val);
+      }
+    });
+  });
+  
+  
+  const mean = allScores.reduce((a, b) => a + b, 0) / allScores.length;
+
+  // 3. CALCULATE STANDARD DEVIATION (σ)
+  const squareDiffs = allScores.map(score => Math.pow(score - mean, 2));
+  const avgSquareDiff = squareDiffs.reduce((a, b) => a + b, 0) / squareDiffs.length;
+  const stdDev = Math.sqrt(avgSquareDiff);
+  
+  
+
   ratingKeys.forEach ( key => {
     let count = 0;
     let total = 0;
     
+    
+  
     data.forEach( item => {
      
      let rawVal = item[key];
@@ -107,14 +132,15 @@ function renderAves(data) {
           count++;
         }
       }
-    
-    
   });
-  
+ 
+
     
     const aveScorepres = count > 0 ? Math.round(total / count): 0;
     
-    const color = getBarColor(aveScorepres);
+  const zScore = stdDev > 0 ? (aveScorepres - mean) / stdDev : 0;
+    const colorValue = Math.max(0, Math.min(100, 75 + (zScore * 12)));
+    const color = getBarColor(colorValue);
     
      const aveCard = document.createElement('div');
      aveCard.className = 'aveCard'
@@ -122,7 +148,7 @@ function renderAves(data) {
      aveCard.style.boxShadow= `0 4px 15px rgba(0, 0, 0, 0.3)`;
      aveCard.innerHTML = `
    
-   <p class="aveNamesL">${key}</p>
+     <p class="aveNamesL">${key}</p>
      <p class="aveNamesS">${key.substring(0,3)}</p>
      <p class="aveScores">${aveScorepres} </p>
      <p class ="aveCount">${count}</p>
@@ -135,8 +161,6 @@ function renderAves(data) {
   });   
                                       
                                       }
-
-
 
 
 
