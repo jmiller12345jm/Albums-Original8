@@ -737,7 +737,8 @@ margin-top:50px;
   }
 
   .titleyearsform {flex-direction:column;
-  margin-top:20pt}
+  margin-top:20pt;
+                  gap:25pt;}
     
   .sortrefresh { margin-top:0pt;
   align-items:center;}
