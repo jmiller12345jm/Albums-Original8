@@ -308,14 +308,35 @@ text-shadow: 0 0 10px gold;}
    --glow-color: 255, 255, 255;
 }
 
-
-
-.card:hover {
-  transform: translateY(-10px);
-  border-color: rgba(var(--glow-color), 0.8);
-  box-shadow: 0px 0px 60px rgba(var(--glow-color), 1);
+.hover-glow-backdrop {
+  position: absolute;
+  top: -50px; left: -50px; right: -50px; bottom: -50px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(40px) brightness(0.8); /* Turns the image into a colorful blob */
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.4s ease;
+  z-index: -1; /* Behind everything */
+  pointer-events: none; /* So it doesn't interfere with clicking buttons */
+  border-radius: 50%;
 }
 
+
+
+.card:hover .hover-glow-backdrop {
+ opacity: 0.8;
+  transform: scale(1.1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.5); /* Semi-white border works with any color */
+}
+
+.card-content {
+  position: relative;
+  z-index: 1;
+}
 
 /* ... (Keep your bar-chart, ave, and titles CSS as they were) ... */
 .titles {
@@ -472,7 +493,7 @@ display: flex;
   display: flex;
   justify-content: center;
   gap: 1pt;
-  background: #121212;
+  background: transparent;
   padding: 2px;
   border-radius: 15px;
   height: 200px;
