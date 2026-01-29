@@ -817,6 +817,7 @@ display: flex;
     #averagesforall {
 margin-top:0px;
     gap:10px;
+      margin-bottom:30px;
 }
  
 .aveCard {
@@ -990,7 +991,7 @@ margin-top:0px;
 
   .display-section {
     width: 100%;
-    margin-top: 20px !important; /* Adjusted for relative header */
+    margin-top: 160px !important; /* Adjusted for relative header */
     padding: 0 !important;
     align-items: center;
   }
