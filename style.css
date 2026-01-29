@@ -1,9 +1,3 @@
-/* This removes borders from the control area and the container */
-/* 1. RESET & GLOBAL STYLES */
-* {
-  box-sizing: border-box; /* Makes padding easier to manage */
-}
-
 
 
 body {
@@ -12,6 +6,13 @@ body {
   padding: 0;
   font-family: 'Inter', sans-serif;
   color: white;
+  overflow-y: auto !important;
+  height: auto;
+}
+
+/* When the JS changes display to flex, we enable clicks */
+.form-overlay[style*="display: flex"] {
+  pointer-events: auto;
 }
 
 /* 2. THE STICKY HEADER (Title, Nav, and Filters stay at the top) */
@@ -24,17 +25,137 @@ body {
   width: 100%;
   background: #080808;
   z-index: 1000;
-  height:150pt;
+  height:130pt;
   padding: 20px 40pt;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 0px solid rgba(255, 255, 255, 0.1);
   box-shadow: none !important;
+}
+
+
+.display-section {
+  margin-top: 140pt; /* Pushes cards below the 150pt header */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0px;
+}
+
+/* The actual rotating circle */
+.loading-circle {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.1); /* Faint track */
+  border-top: 5px solid #ffffff; /* The visible moving part */
+  border-radius: 80%;
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3)
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+
+
+
+.toggle {
+  background: #1a1a1a;
+  padding: 2rem;
+  border-radius: 15px;
+  border: 1px solid #333;
+  width: 60%;
+  max-width: 500px;
+  position: relative;
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+.close-popup {
+  position: absolute;
+  top: 10px; right: 15px;
+  background: none; border: none;
+  color: white; font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.popup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items:center
+}
+
+/* Adjust your inputs to be full width inside the popup */
+.popup-form input, .popup-form select {
+  padding: 12px;
+  background: #222;
+  border: 1px solid #444;
+  color: white;
+  border-radius: 20px;
+  width:80%;
+  text-align:center
+}
+
+.popup-form select {appearance:none;
+color:#666;
+cursor:pointer;}
+
+.popup-form select:hover {border:1px solid #fff }
+
+.popup-form input:hover {border:1px solid #fff }
+
+.form-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  display: none; 
+  justify-content: center;
+  align-items: center;
+  pointer-events: none; /* Ensure it catches clicks when display: flex */
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+.formcardbtn {
+  display:flex;
+  font-size:18px;
+  letter-spacing:2px;
+  color:#666;
+  background:transparent;
+  border:transparent;
+  border-radius:20px;
+  overflow:none;
+  text-align:center;
+  width:auto;
+  height:auto;
+  cursor:pointer;
+  transition:1s;
+  text-transform:uppercase;
+  margin-top:60pt
+}
+.formcardbtn:hover {color:#ffffff;
+  transform: translateY(-1px);
+  border:2px #666;
+  text-shadow: 0 0 20px gold;
 }
 
 .titleyearsform {
   display:flex;
 flex-direction: row;
 align-items:center;
-gap:10pt;
+gap:30pt;
 }
 
 
@@ -81,7 +202,7 @@ h1:hover {
   transition: 0.4s;
 }
 
-.nav-btn:hover {text-shadow: 0px 0px 5px gold;
+.nav-btn:hover {color:#ffffff;
 
 }
 
@@ -160,7 +281,7 @@ border-radius:10pt;
 
 
 .sortrefresh {
-  margin-top:10pt;
+  margin-top:0pt;
   display:flex;
   flex-direction:row;
 }
@@ -195,6 +316,7 @@ border-radius:10pt;
   text-transform: uppercase;
   outline: none;
   appearance:none;
+  transition:1s;
 }
 
 .sort-dropdown:hover {color:#ffffff}
@@ -224,7 +346,7 @@ border-radius:10pt;
   letter-spacing: 2px;
   font-weight: 700;
   cursor: pointer;
-  transition: 0.4s;
+  transition: 1s;
   text-align:center;
 }
 
@@ -243,13 +365,13 @@ text-shadow: 0 0 10px gold;}
 /* 3. NAVIGATION (Years) */
 
 
-
 #averagesforall {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  margin-top: 250px;
+  margin-top: 0; /* REMOVE the 250px margin you had here before */
+  margin-bottom: 0px;
   min-height: 50px;
   width: 100%;
 }
@@ -260,7 +382,8 @@ text-shadow: 0 0 10px gold;}
   border-radius: 20px;
   text-align: center;
   min-width: 50pt;
-  min-height:50pt
+  min-height:50pt;
+    transition:0.5s;
 }
 .aveNamesL {margin:0; font-size:12px; opacity:0.8;}
 .aveNamesS{ display:none}
@@ -272,12 +395,6 @@ text-shadow: 0 0 10px gold;}
 
 
 
-/* 4. FILTERS (Now aligned left under title) */
-
-/* 5. THE FORM SECTION (Positioned top right) */
-
-
-/* 6. THE CARDS CONTAINER (Shifted down to clear the fixed header) */
 #cardContainer {
   display: flex;
   flex-direction: column;
@@ -289,13 +406,13 @@ text-shadow: 0 0 10px gold;}
 }
 
 .card {
-  overflow:hidden;
+  overflow: hidden;
   position: relative;
   background: #0F0F0F;
   border-radius: 40px;
   padding: 20px;
   
-  transition: transform 0.5s ease, box-shadow 0.5s;
+  transition: transform 1s ease, box-shadow 1s;
   display: flex;
   flex-direction: column;
   margin-bottom:10px;
@@ -306,45 +423,46 @@ text-shadow: 0 0 10px gold;}
   box-sizing: border-box; /* Ensures padding doesn't push it off-screen */
   height: auto;          /* Let height adjust to content */
   min-height: 230pt;
+ 
 }
 
 .hover-glow-backdrop {
   position: absolute;
-  top: 0px; left: 0px; right: 0px; bottom: 0px;
+  top: -50px; left: -50px; right: -50px; bottom: -50px;
   background-size: cover;
   background-position: center;
-  filter: blur(40px) brightness(0.7); /* Turns the image into a colorful blob */
+  filter: blur(40px) brightness(0.8); /* Turns the image into a colorful blob */
   opacity: 0; /* Hidden by default */
   transition: opacity 0.4s ease;
   z-index: -1; /* Behind everything */
   pointer-events: none; /* So it doesn't interfere with clicking buttons */
-  border-radius: 0%;
+  border-radius: 50%;
 }
 
 
-
-.card:hover .hover-glow-backdrop {
- opacity: 0.7;
-  transform: scale(1.01);
+.card.is-centered .hover-glow-backdrop {
+ opacity: 0.8;
+  transform: scale(1.1);
 }
 
-.card:hover {
+.card.is-centered {
   transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.5); /* Semi-white border works with any color */
 }
+
+
+.card.is-centered .metaname{color:#ffffff}
+.card.is-centered .save-card-btn{color:#ffffff}
+.card.is-centered .comments{color:#ffffff}
+.card.is-centered .edit-releaseDate-btn{color:#ffffff}
+.card.is-centered .edit-art-btn{color:#ffffff}
+.card.is-centered .releaseDate{color:#ffffff}
+
 
 .card-content {
   position: relative;
   z-index: 1;
 }
-
-
-
-.card:hover .metaname{color:#ffffff}
-.card:hover .save-card-btn{color:#ffffff}
-.card:hover .comments{color:#ffffff}
-.card:hover .edit-releaseDate-btn{color:#ffffff}
-.card:hover .edit-art-btn{color:#ffffff}
-.card:hover .releaseDate{color:#ffffff}
 
 /* ... (Keep your bar-chart, ave, and titles CSS as they were) ... */
 .titles {
@@ -452,7 +570,7 @@ margin-right:40pt;}
   text-transform: uppercase;
   cursor: pointer;
   letter-spacing: 2px;
-  transition: color 0.5s;
+  transition: color 0.2s;
 }
 .metaname:hover {color:#ffffff}
 
@@ -479,7 +597,7 @@ display: flex;
   text-transform: uppercase;
   cursor: pointer;
   letter-spacing: 1px;
-  transition: color 0.5s;
+  transition: color 0.2s;
 }
 
 .save-card-btn:hover { color: #ffffff; 
@@ -508,6 +626,7 @@ display: flex;
 }
 
 .bar-wrapper {
+  background:transparent;
   display: flex;
   flex-direction: column; /* Stacks elements vertically */
   align-items: center;
@@ -675,9 +794,7 @@ display: flex;
     width: 100%;
     margin: 20px 0;
   }
-}
 
-@media (max-width: 768px) {
   .card-content {
     display: flex;
     flex-direction: column !important;
@@ -686,11 +803,11 @@ display: flex;
   }
 
     #averagesforall {
-margin-top:50px;
-    gap:30px;
+margin-top:0px;
+    gap:10px;
 }
-
-  .aveCard {
+ 
+.aveCard {
   padding: 8px 0px 8px 0px;
   border-radius: 10px;
   text-align: center;
@@ -705,8 +822,6 @@ margin-top:50px;
     text-transform: uppercase; /* Makes 3 letters look like a cool badge */
     font-weight: bold;}
 .aveNamesL{ display:none}
- 
-
   /* 1. Art stays at top */
   .artandedit {
     order: 1;
@@ -758,7 +873,7 @@ margin-top:50px;
 
 .topofscreen {
     position:relative;    /* Keep it sticky */
-    height: 300pt !important; /* Let it expand to fit stacked items */
+    height: 80pt !important; /* Let it expand to fit stacked items */
     padding: 10px !important;
     display: flex;
     flex-direction: column;
@@ -769,9 +884,9 @@ margin-top:50px;
 
   .titleyearsform {flex-direction:column;
   margin-top:20pt;
-                  gap:25pt;}
+  margin-bottom:0pt;}
     
-  .sortrefresh { margin-top:0pt;
+  .sortrefresh { margin-bottom:10pt;
   align-items:center;}
   
   glow-text-btn {border:none}
@@ -846,4 +961,6 @@ margin-top:50px;
   #cardContainer {
     margin-top: 20px !important; /* Adjust this number if your header gets taller */
   }
+  
+  .formcardbtn {margin-top:10pt}
 }}
