@@ -10,7 +10,10 @@ let globalData = [];
 // 2. INITIALIZATION
 function init() {
   const container = document.getElementById('cardContainer');
-  container.innerHTML = "<p style='color:white; letter-spacing:3px; text-align:center;'>Loading...</p>";
+  container.innerHTML = ` <div class="loader-container">
+      <div class="loading-circle"></div>
+      <p style="color:white; letter-spacing:3px; margin-top:15px;"></p>
+    </div> `;
 if (scriptURL.includes('Sheet3')) {
     // We are in Archive (2025)
     document.getElementById('btn-arc').classList.add('active-glow');
@@ -167,6 +170,8 @@ function renderAves(data) {
 
 
 
+
+
 // 5. RENDER CARDS
 function renderCards(data) {
   const container = document.getElementById('cardContainer');
@@ -230,6 +235,25 @@ function renderCards(data) {
       return valB - valA; // High to low
     });
   }
+  
+  
+   let allScores = [];
+  ratingKeys.forEach(key => {
+    data.forEach(item => {
+      let val = Number(item[key]);
+      if (val > 0) {
+        if (val <= 10) val *= 10;
+        allScores.push(val);
+      }
+    });
+  });
+  
+  
+  const mean = allScores.reduce((a, b) => a + b, 0) / allScores.length;
+      const squareDiffs = allScores.map(score => Math.pow(score - mean, 2));
+  const avgSquareDiff = squareDiffs.reduce((a, b) => a + b, 0) / squareDiffs.length;
+  const stdDev = Math.sqrt(avgSquareDiff);
+  
   // Create Card HTML
   processedData.forEach((item, index) => {
     const card = document.createElement('div');
@@ -261,24 +285,6 @@ function renderCards(data) {
     
     
   
-  let allScores = [];
-  ratingKeys.forEach(key => {
-    data.forEach(item => {
-      let val = Number(item[key]);
-      if (val > 0) {
-        if (val <= 10) val *= 10;
-        allScores.push(val);
-      }
-    });
-  });
-  
-  
-  const mean = allScores.reduce((a, b) => a + b, 0) / allScores.length;
-      const squareDiffs = allScores.map(score => Math.pow(score - mean, 2));
-  const avgSquareDiff = squareDiffs.reduce((a, b) => a + b, 0) / squareDiffs.length;
-  const stdDev = Math.sqrt(avgSquareDiff);
-  
-    
     
      const zScore = stdDev > 0 ? (item.avgScore - mean) / stdDev : 0;
     const colorValue = Math.max(0, Math.min(100, 75 + (zScore * 12)));
@@ -329,7 +335,7 @@ function renderCards(data) {
 
 `;
     container.appendChild(card);
-
+setTimeout(initScrollObserver, 100);
     // iTunes Color Sampling
     const img = document.getElementById(imgId);
     img.onload = function() {
@@ -388,6 +394,7 @@ function renderCards(data) {
     } // Closes if (!item.Art && searchTerm)
   }); // Closes processedData.forEach loop
 } 
+        
 // 6. HELPER FUNCTIONS
 function getBarColor(val) {
   if (val >= 95) return "linear-gradient(to top, #2ecc71, #bc13fe)";
@@ -468,29 +475,112 @@ fetch(baseScriptURL, { // Use baseScriptURL for POST
 
 
 function editreleaseDate(rowNumber) {
-  const newreleaseDate =prompt ("YYYY-MM-DD");
+  const newreleaseDate = prompt("YYYY-MM-DD");
   if (!newreleaseDate) return;
-  fetch(scriptURL, {
+  
+  // Identify which sheet we are on
+  const currentSheet = scriptURL.includes('Sheet3') ? 'Sheet3' : 'albums2026';
+
+  fetch(baseScriptURL, { // Use baseScriptURL for POST
     method: 'POST',
     mode: 'no-cors',
-    body: JSON.stringify({action: "updatereleaseDate", row:rowNumber, relDate: newreleaseDate})
-  }).then(() => init());
-  
+    body: JSON.stringify({
+      action: "updatereleaseDate", 
+      row: rowNumber, 
+      relDate: newreleaseDate,
+      sheetMode: currentSheet // Essential for hitting the right tab
+    })
+  }).then(() => {
+    setTimeout(() => init(), 500);
+  });
 }
-
-
-
 
 function addcomment(rowNumber) {
-  const newcomment= prompt("hot take")
+  const newcomment = prompt("hot take");
   if (!newcomment) return;
-  fetch(scriptURL, {
+
+  const currentSheet = scriptURL.includes('Sheet3') ? 'Sheet3' : 'albums2026';
+
+  fetch(baseScriptURL, { // Use baseScriptURL
     method: 'POST',
     mode: 'no-cors',
-    body: JSON.stringify({action: "updateComment", row:rowNumber, newC: newcomment})
-  }).then(() => init());
+    body: JSON.stringify({
+      action: "updateComment", 
+      row: rowNumber, 
+      newC: newcomment,
+      sheetMode: currentSheet
+    })
+  }).then(() => {
+    setTimeout(() => init(), 500);
+  });
 }
 
+function createForm() {
+  // 1. Check if it's already on the screen
+  const existingOverlay = document.getElementById('formOverlay');
+  if (existingOverlay) {const isClosing = existingOverlay.style.display === 'flex';
+    
+    existingOverlay.style.display = isClosing ? 'none' : 'flex';
+    // If closing, set overflow to auto. If opening, set to hidden.
+    document.body.style.overflow = isClosing ? 'auto' : 'hidden';
+    return;
+  }
+
+  // 2. Create the element
+  const submitForm = document.createElement('div');
+  submitForm.id = 'formOverlay';
+  submitForm.className = 'form-overlay'; // Ensure this CSS has position: fixed
+  
+  submitForm.innerHTML = `
+    <div class="toggle">
+      <button class="close-popup" onclick="createForm()">×</button>
+      <form id="reviewForm" class="popup-form">
+        <input type="text" name="Artist" placeholder="Artist" required>
+        <input type="text" name="Album" placeholder="Album" required>
+        <select id="categoryDropdown" name="Chooser" required>
+          <option value="">Category</option>
+        </select>
+        <button type="submit" id="submitBtn">Submit</button>
+      </form>
+      <div id="status"></div>
+    </div>
+  `;
+
+  // 3. Add to page and show
+  document.body.appendChild(submitForm);
+  submitForm.style.display = 'flex';
+  document.body.style.overflow = 'hidden'; // LOCK SCROLL on first create
+
+  if (globalData && globalData.length > 0) {
+    setupDropdown(Object.keys(globalData[0]));
+  }
+  document.getElementById('reviewForm').addEventListener('submit', handleSubmit);
+}
+
+
+
+function initScrollObserver() {
+  const options = {
+    root: null, // use the viewport
+    rootMargin: '-49% 0px -49% 0px', // Only triggers when in the middle 20% of the screen
+    threshold: 0
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-centered');
+      } else {
+        entry.target.classList.remove('is-centered');
+      }
+    });
+  }, options);
+
+  // Attach observer to all cards
+  document.querySelectorAll('.card').forEach(card => {
+    observer.observe(card);
+  });
+}
 // 7. EVENT LISTENERS
 window.addEventListener('DOMContentLoaded', init);
 
@@ -513,7 +603,7 @@ function handleSubmit(e) {
   
   const myFormData = new FormData(e.target);
   const dataObject = Object.fromEntries(myFormData.entries());
-  dataObject.sheetMode = currentSheet; // Tell Google which sheet to add to
+  dataObject.sheetMode = currentSheet;
 
   submitBtn.innerText = "Sending...";
   submitBtn.classList.add('glow-sending');
@@ -523,19 +613,25 @@ function handleSubmit(e) {
     mode: 'no-cors',
     body: JSON.stringify(dataObject)
   }).then(() => {
-   
-      submitBtn.classList.remove('glow-sending')
-  
+    submitBtn.classList.remove('glow-sending');
     submitBtn.innerText = "Success!";
-    submitBtn.style.color="#2ecc71"
+    submitBtn.style.color = "#2ecc71";
+    
     e.target.reset();
+
+    // --- NEW POPUP CLOSING LOGIC ---
     setTimeout(() => {
+      const overlay = document.getElementById('formOverlay');
+      if (overlay) {
+        overlay.style.display = 'none'; // Hide the popup
+      }
+      document.body.style.overflow = 'auto';
+      // Reset button text for next time
       submitBtn.innerText = "Submit";
-       submitBtn.style.color = "#666"
-      init();
+      submitBtn.style.color = "#666";
+      
+      init(); // Refresh the list to show the new album
     }, 1500);
   });
 }
 
-// Add this listener at the very bottom
-document.getElementById('reviewForm').addEventListener('submit', handleSubmit);
