@@ -488,6 +488,7 @@ text-shadow: 0 0 10px gold;}
   margin-top:50pt;
   color:#666;
   transition:0.5s;
+  cursor:pointer;
 }
 
 .comments:hover{color:gold}
