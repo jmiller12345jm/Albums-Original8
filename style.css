@@ -1,5 +1,4 @@
 
-
 body {
   background-color: #080808;
   margin: 0;
@@ -25,16 +24,15 @@ body {
   width: 100%;
   background: #080808;
   z-index: 1000;
-  height:130pt;
-  padding: 20px 40pt;
+  height:60pt;
+  padding: 0px 20pt 0pt 20pt;
   border-bottom: 0px solid rgba(255, 255, 255, 0.1);
   box-shadow: none !important;
 }
 
-
 .display-section {
-  margin-top: 140pt; /* Pushes cards below the 150pt header */
-  padding: 20px;
+  margin-top: 60pt; 
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -143,8 +141,8 @@ body.modal-open {
   cursor:pointer;
   transition:1s;
   text-transform:uppercase;
-  margin-top:60pt;
-  margin-right:80px;
+  margin-top:0pt;
+  padding-right:50px;
 }
 .formcardbtn:hover {color:#ffffff;
   transform: translateY(-1px);
@@ -156,7 +154,7 @@ body.modal-open {
   display:flex;
 flex-direction: row;
 align-items:center;
-gap:30pt;
+gap:0pt;
 }
 
 
@@ -165,35 +163,35 @@ gap:30pt;
 .titleyears {
   flex:4;
   display:flex;
-flex-direction: column;
+flex-direction: row;
   padding:0pt;
-gap:0pt;
+gap:10pt;
 align-items:left;}
 
 
 h1 {
   flex:1;
   padding: 0pt 0pt;
-  font-size: 50px;
+  font-size: 30px;
   text-transform: uppercase;
+  font-weight:1;
   color: #ffffff;
   letter-spacing: 2px;
   transition: all 1s;
   cursor: default;
-  line-height:10pt
+  line-height:0pt;
+  text-shadow: 0 0 10px gold
 }
 
-h1:hover {
- text-shadow: 0px 0px 5px gold;
-}
 
 
 
 .page-nav {
-  flex:2;
+  flex:1;
 }
 
 .nav-btn {
+  margin-top:4pt;
   background: transparent;
   border: none;
   color: #666;
@@ -282,7 +280,7 @@ border-radius:10pt;
 
 
 .sortrefresh {
-  margin-top:0pt;
+  margin-bottom:0pt;
   display:flex;
   flex-direction:row;
 }
@@ -290,7 +288,7 @@ border-radius:10pt;
 
 .filter-controls {
   flex:1;
-  padding:20pt 30pt 0pt 0pt;
+  padding:10pt 0pt 5pt 0pt;
   background:transparent;
   display: flex;
   flex-direction:row;
@@ -313,6 +311,7 @@ border-radius:10pt;
   border: none;
   font-size: 11px;
   letter-spacing:2px;
+  border-radius:20pt;
   cursor: pointer;
   text-transform: uppercase;
   outline: none;
@@ -320,7 +319,21 @@ border-radius:10pt;
   transition:1s;
 }
 
-.sort-dropdown:hover {color:#ffffff}
+.sort-dropdown option {
+  background-color: #1a1a1a; /* Dark background to match your site */
+  color: #666;               /* Gray text */
+  padding: 10px;
+  border-radius:10pt;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  border: none;
+  text-shadow: 0 0 10px gold
+}
+
+.sort-dropdown option:hover {background-color:#fff}
+
+.sort-dropdown:hover {color:#ffffff;
+text-shadow: 0 0 10px gold}
 
 
 
@@ -337,8 +350,8 @@ border-radius:10pt;
 
 
 .glow-text-btn {
-  margin-top:20pt;
-  margin-right:80px;
+  margin-top:5pt;
+  margin-right:50px;
   align-items:center;
   background: transparent;
   border: none;
@@ -358,7 +371,7 @@ text-shadow: 0 0 10px gold;}
 
 .active-glow {
   color: #fff !important;
-  text-shadow: 0 0 1px gold;
+  text-shadow: 0 0 10px gold;
   transform: scale(1.1);
   transition: all 0.3s ease;
 }
@@ -622,12 +635,12 @@ display: flex;
   justify-content: center;
   gap: 1pt;
   background: transparent;
-  padding: 2px;
+  padding: px;
   border-radius: 15px;
   height: 200px;
   width: fit-content;     
-  margin: 0 auto;         /* Center the chart itself */
-  min-width: 250px;
+  margin: 2pt auto;         /* Center the chart itself */
+  min-width: 200px;
 }
 
 .bar-wrapper {
@@ -641,7 +654,7 @@ display: flex;
 
 .bar-track {
   position: relative;
-  width: 20px;
+  width: 18px;
   height: 100%; /* Adjust height as needed */
   background: #333;
   border-radius: 4px;
@@ -786,7 +799,9 @@ display: flex;
 }
 @media (max-width: 768px) {
 
-
+ 
+  .titleyears {flex-direction:column;
+  align-items:center}
   body {
     padding: 0;
     margin: 0;
@@ -901,7 +916,8 @@ margin-top:0px;
 
   .titleyearsform {flex-direction:column;
   margin-top:20pt;
-  margin-bottom:0pt;}
+  margin-bottom:0pt;
+  align-items:center;}
     
   .sortrefresh { margin-bottom:10pt;
   align-items:center;}
@@ -918,7 +934,7 @@ margin-top:0px;
   }
 
   
-  .titleyears {gap:20pt}
+  .titleyears {gap:0pt}
   /* 2025/2026 Buttons */
   .page-nav {
     flex:1;
@@ -988,11 +1004,11 @@ margin-top:0px;
 
 
   .delete-btn {top:2%}
-
+  .formcardbtn {padding-right:0}
 
   .display-section {
     width: 100%;
-    margin-top: 160px !important; /* Adjusted for relative header */
+    margin-top: 80px !important; /* Adjusted for relative header */
     padding: 0 !important;
     align-items: center;
   }
