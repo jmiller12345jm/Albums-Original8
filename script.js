@@ -27,17 +27,25 @@ if (scriptURL.includes('Sheet3')) {
     .then(res => res.json())
     .then(data => {
       globalData = data;
+    console.log("Data Sample:", data[0]); // Look at this in F12 console!
+    
+    
       if (data.length > 0) {
-        setupDropdown(Object.keys(data[0]));
+        const headers = Object.keys(data[0]);
+        
+        console.log("Extracted Headers:", headers);
+        setupDropdown(headers);
       }
       renderCards(data);
       renderAves(data);
+      setupDropdown(data[0]);
     })
-    .catch(err => {
-      console.error("Fetch Error:", err);
-      container.innerHTML = "<p style='color:red;'>Error loading data. Check console.</p>";
-    });
+
+
+
 }
+
+
 function switchSheet(mode) {
   // 1. Update the URL
   scriptURL = (mode === 'archive') ? archiveURL : collectionURL;
@@ -55,30 +63,36 @@ function switchSheet(mode) {
 
 // 4. DROPDOWN SETUP
 function setupDropdown(headers) {
+  // 1. Check if headers actually exist
+  if (!headers || headers.length === 0) {
+    console.error("SetupDropdown failed: No headers provided.");
+    return;
+  }
+
   const dropdown = document.getElementById('categoryDropdown');
   const sortSelect = document.getElementById('sortSelect');
-  if (!dropdown) return;
-  dropdown.innerHTML = '<option value="">Chooser</option>';
   
-  // Rating columns (adjust slice if headers change)
+  // 2. Slice the categories (Column 7 onwards)
   const ratingCategories = headers.slice(7, 20);
-if(dropdown) {ratingCategories.forEach(cat => {
-    const option = document.createElement('option');
-    option.value = cat;
-    option.innerText = cat; 
-    dropdown.appendChild(option);
-  })};
+  console.log("Categories to load:", ratingCategories);
+
+  // 3. Fill the Sort Dropdown (Main Page)
   if (sortSelect) {
-    // Keep the defaults, then add categories
     sortSelect.innerHTML = `
-     
       <option value="newest">Newest Added</option>
-       <option value="Release">Release Date</option>
+      <option value="Release">Release Date</option>
       <option value="highest">Overall Average</option>
     `;
     ratingCategories.forEach(cat => {
-      let opt = new Option(cat, cat); // Value and Text are the same
-      sortSelect.add(opt);
+      sortSelect.add(new Option(cat, cat));
+    });
+  }
+
+  // 4. Fill the Category Dropdown (Inside the Form - might be null)
+  if (dropdown) {
+    dropdown.innerHTML = '<option value="">Chooser</option>';
+    ratingCategories.forEach(cat => {
+      dropdown.add(new Option(cat, cat));
     });
   }
 }
@@ -634,4 +648,5 @@ function handleSubmit(e) {
     }, 1500);
   });
 }
+
 
