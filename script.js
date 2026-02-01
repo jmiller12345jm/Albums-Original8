@@ -73,7 +73,7 @@ function setupDropdown(headers) {
   const sortSelect = document.getElementById('sortSelect');
   
   // 2. Slice the categories (Column 7 onwards)
-  const ratingCategories = headers.slice(7, 20);
+  const ratingCategories = headers.slice(7, 16);
   console.log("Categories to load:", ratingCategories);
 
   // 3. Fill the Sort Dropdown (Main Page)
@@ -106,7 +106,7 @@ function renderAves(data) {
 
 
   const allKeys = Object.keys(data[0]);
-  const ratingKeys = allKeys.slice(7, 20); 
+  const ratingKeys = allKeys.slice(7, 16); 
   
 
   
@@ -197,12 +197,12 @@ function renderCards(data) {
   if (data.length === 0) return;
 
   const allKeys = Object.keys(data[0]);
-  const ratingKeys = allKeys.slice(7, 20); 
+  const ratingKeys = allKeys.slice(7, 16); 
 
   // Process data for Sorting and Decimal Fix
  let processedData = data.map((item, index) => {
     const allKeys = Object.keys(data[0]);
-    const ratingKeys = allKeys.slice(7, 20);
+    const ratingKeys = allKeys.slice(7, 16);
     
     const ratings = ratingKeys.map(key => {
       let val = Number(item[key]) || 0;
@@ -648,5 +648,4 @@ function handleSubmit(e) {
     }, 1500);
   });
 }
-
 
