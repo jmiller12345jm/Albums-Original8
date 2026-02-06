@@ -1,4 +1,4 @@
-const baseScriptURL = 'https://script.google.com/macros/s/AKfycbzG9pdG390UHr7OmGqYKBVpAMsEvRxkNxkuHkJaYgRzWpN5ToTfhNWyJ9LjacSg6wRp/exec';
+const baseScriptURL = 'https://script.google.com/macros/s/AKfycbyTbMeaFiJxG_VyyS9m0f_OtpoGQkPUoVd7LYvAXkFdtqrL0K24k_4tdCwkmV4SNh8G/exec';
 
 
 
@@ -846,34 +846,38 @@ function createForm() {
 
 function addUserPrompt() {
   const newName = prompt("Enter the name of the new rater:");
-  
-  // 1. If they cancel or leave it blank, do nothing
   if (!newName) return;
 
-  // 2. Show the loader immediately
   const loader = document.getElementById('loadingOverlay');
   if (loader) loader.style.display = 'flex';
 
-  const url = `${baseScriptURL}?action=addUserGlobal&name=${encodeURIComponent(newName)}`;
-
-  fetch(url, { mode: 'no-cors' }) 
-  .then(() => {
-    // 3. Instead of an alert (which pauses the code), 
-    // we keep the loader visible while init() fetches the fresh data.
-    console.log("User added, refreshing data...");
-    
-    // We pass a callback to init if possible, or just chain the hide logic
-    init(); 
-
-    // 4. Give the UI a moment to catch up, then hide loader
-    setTimeout(() => {
+  fetch(baseScriptURL, {
+    method: 'POST',
+    // REMOVED mode: 'no-cors'
+    body: JSON.stringify({
+      action: "addUserGlobal",
+      name: newName
+    })
+  })
+  .then(res => res.text()) // Now we can actually read the text!
+  .then(result => {
+    if (result.includes("Error")) {
+      // This catches your "Error: User already exists!" message
+      alert(result);
+      if (loader) loader.style.display = 'none';
+    } else {
+      console.log("Success:", result);
+      init(); 
+      setTimeout(() => { 
         if (loader) loader.style.display = 'none';
-    }, 1500);
+        alert("User Added Successfully!"); 
+      }, 1500);
+    }
   })
   .catch(err => {
-    console.error("Actual error:", err);
+    console.error("Network error:", err);
     if (loader) loader.style.display = 'none';
-    alert("The request failed to send.");
+    alert("Connection failed. Check your internet.");
   });
 }
 
