@@ -3,51 +3,158 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
+
+<div id="loadingOverlay" class="loading-overlay" style="display: none;">
+    <div class="loader"></div>
+    <p>Updating...</p>
+</div>
+<div class="truetopofscreen">
+
+
+
+
+
 <div class="topofscreen">
  
+  
+  
+  
+  
    <div class ="titleyearsform">
-        <div class = "titleyears"> 
-  <h1>Albums</h1>
-
-  <div class="page-nav">
-    <button onclick="switchSheet('collection')" id="btn-col" class="nav-btn active">2026</button>
-    <button onclick="switchSheet('archive')" id="btn-arc" class="nav-btn">2025</button>
-  </div>
-
-  </div>
      
-     <div>
-     <button class= "formcardbtn" onclick="createForm()"> Submit album</button>
-       
-     </div>
-  </div>    
      
+        <div class = "titleyears">
+          
+          <h1>Albums</h1>
+
+              <div class="page-nav">
+                
+                    <button onclick="switchSheet('collection')" id="btn-col" class="nav-btn active">2026</button>
+                     <button onclick="switchSheet('archive')" id="btn-arc" class="nav-btn">2025</button>
+                
+               </div>      
+
+          </div>
+     
+        
+     
+        </div>
    
   
-  <div class="sortrefresh">
-  <div class="filter-controls">
-    <label for="sortSelect" class="filter-label">SORT BY:</label>
-        <select id="sortSelect" class="sort-dropdown">
-          <option value="Release">Release Date</option>
-          <option value="newest">Newest Added</option>
-          <option value="highest">Overall Average</option>
-        
-      </select>
-     </div>
-     
-    <button id="refreshBtn" class="glow-text-btn" onclick="manualRefresh()">REFRESH</button>
-  </div>
-
-
-
-</div>
+    <div class="refsortact"> 
+  
+          <div class="sortrefresh">
+           <button id="refreshBtn" class="glow-text-btn" onclick="manualRefresh()">REFRESH</button>
     
+          <div class="filter-controls">
+           <label for="sortSelect" class="filter-label">SORT:                 </label>
+            <input list="sortOptions" id="sortSelect" class="sort-dropdown" placeholder="">
+            <datalist id="sortOptions"></datalist>
+            </div>
+  
+      </div>
+          
+   
+    
+                              </div>
+   
+  </div>
+  
+  
+<div class="newusersubmitbtn">
+            
+           <button id="addUserBtn" class="newuserbtn" onclick="addUserPrompt()">+ User </button>
+            <button class="formcardbtn" onclick="createForm()"> + Album</button>
+   
+           </div> 
+  
+  
 </div>
 
 <section class="display-section">
- <div class="averages" id="averagesforall">
-  </div>
+  
+  <div class="statsandsearch">
+    <div class="search-container">
+  <input type="text" id="albumSearch" placeholder="Search Artist or Album..." oninput="handleSearch()">
+</div>
+  
+     <div class="statsbtnarea"> 
+              <button id="statsBtn" class="activity-btn" onclick="toggleStatsModal(true)"><svg width="40" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+  </svg></button>
+
+                    <div id="statsModal" class="form-overlay" style="display: none;">
+                             <div class="toggle stats-popup-content">
+                              <button class="close-popup" onclick="toggleStatsModal(false)">×</button>
+    
+                              <h2 style="color: white; margin-top: 0;">Activity</h2>
+    
+                                          <div id="masterGraphWrapper" style="margin-bottom: 20px;">
+                                            
+                                          </div>
+
+                                            <div class="stats-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                             <h3 style="color: #666; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; margin: 0;"></h3>
+                                           <input type="text" id="userAveSearch" placeholder="Search users..." oninput="filterUserAves(this.value)" 
+             class="searchuseraves">
+                                              </div>
+    
+                                              <div class="scroller-window">
+                                                <button class="scroll-arrow left" onclick="scrollAves(-200)">&#10094;</button>
+                                                       <div id="averagesforall">
+                                                         
+                                                       </div>
+                                                      <button class="scroll-arrow right" onclick="scrollAves(200)">&#10095;</button>
+                                                 </div>
+  
+                                                   <div class="recent-activity-container" style="margin-bottom: 30px;">
+    <p style="color: #666; font-size: 11px; letter-spacing: 2px; margin-bottom: 12px; text-transform: uppercase;">Recent</p>
+                                                       <div id="recentUpdatesList"       class="recent-updates-list">
+                                                     </div>
+                                                     </div>
+  
+                                                      </div>
+    
+    
+   
+                                          </div>
+
+                                  </div>
+  
+  
+
+   
+  </div> 
+  
+  
   <div id="cardContainer">
     <p class="loading-text">Refreshing...</p>
   </div>
 </section>
+
+<div id="ratingModal" class="form-overlay">
+  <div class="toggle">
+    <button class="close-popup" onclick="closeRatingModal()">×</button>
+    <div class="popup-form">
+      <h2 id="modalAlbumTitle" style="color: gold; margin-bottom: 5px;">Album Title</h2>
+      <p style="font-size: 12px; color: #888; margin-bottom: 20px;">Select your name and set your score</p>
+      
+     <input list="raterList" id="modalUserSelect" placeholder="Search Rater..." class="modal-input">
+<datalist id="raterList"></datalist>
+
+      <div class="modal-slider-container">
+        <input type="range" id="modalSlider" min="0" max="100" step="1" value="50" class="album-slider modern-slider">
+        <div id="modalSliderValue" class="slider-val-box">50</div>
+      </div>
+
+      <button id="modalSaveBtn" class="save-card-btn" style="margin-top: 20px; font-size: 18px;">Submit Rating</button>
+    </div>
+  </div>
+</div>
+
+
+<footer style="margin-top: 350px; padding: 20px; opacity: 0.6; font-size: 11px; text-align: center; border-top: 1px solid #333;">
+    <p><strong>Privacy Note:</strong> This is a hobby project for music discovery. 
+    No passwords or personal data are collected. Usernames are public and used only for rating attribution.</p>
+    <p>© 2026 Album Club | Hosted on GitHub Pages</p>
+</footer>
