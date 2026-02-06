@@ -716,6 +716,7 @@ function saveCardUpdate(rowNumber, btnElement) {
     setTimeout(() => {
       modal.style.display = 'none';
       document.body.classList.remove('modal-open');
+      btnElement.innerText = "Submit Rating";
       init(); 
     }, 1000);
   });
